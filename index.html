@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="ML-Based Watermelon Quality Detector" />
+
+    <meta name="generator" content="Hugo 0.79.0" />
+    <title>Melon Tunes</title>
+    <link rel="icon" href="assets/imgs/MainGraphic.jpg" />
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/replace.js"></script>
+    <script src="js/nav.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top cardinal-back">
+        <div class="container-fluid">
+          <div id="logo">
+            <img alt="Melon Tunes" src="assets/imgs/MainGraphic.jpg" />
+          </div>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarCollapse"
+            aria-controls="navbarCollapse"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item active">
+                <a class="nav-link" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#about">How it Works</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#recommend">Try it Out</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="body-container">
+      <div class="jumbotron paral" id="welcome-message">
+        <div class="smaller-width">
+          <h1 class="display-3">Welcome to Melon Tunes</h1>
+          <p>
+            Tired of not knowing how people mysteriously tap on watermelons and
+            magically proclaim that they've found the right one?
+          </p>
+          <p>Well oh boy do we have the project for you.</p>
+          <p>
+            At Melon Tunes, we tell you whether or not that watermelon is right
+            for you!
+          </p>
+        </div>
+      </div>
+
+      <main class="container">
+        <!-- team, events, and apps ================================================== -->
+        <div class="container">
+          <div class="container">
+            <!-- START THE FEATURETTES -->
+
+            <hr class="featurette-divider" id="about" />
+
+            <div class="row featurette">
+              <h2 class="featurette-heading">How it Works</h2>
+              <div class="col-md-3">
+                <div class="project-sidebar project-block">
+                  <button
+                    class="bar-item bar-btn tablink active"
+                    onclick="openLink(event, 'Data')"
+                  >
+                    Data Collection
+                  </button>
+                  <button
+                    class="bar-item bar-btn tablink"
+                    onclick="openLink(event, 'Model')"
+                  >
+                    Model Creation
+                  </button>
+                  <button
+                    class="bar-item bar-btn tablink"
+                    onclick="openLink(event, 'Recommendation')"
+                  >
+                    Recommendation
+                  </button>
+                  <button
+                    class="bar-item bar-btn tablink"
+                    onclick="openLink(event, 'Improvement')"
+                  >
+                    Improvement
+                  </button>
+                </div>
+              </div>
+
+              <div class="col-md-9">
+                <div class="project-info">
+                  <div
+                    id="Data"
+                    class="bar-container project animate-right active"
+                    style="display: block"
+                  >
+                    <h2>Data Collection</h2>
+                    <p>
+                      To kickstart this project, we knocked-on, observed,
+                      assessed, and enjoyed 50 watermelons.
+                    </p>
+                  </div>
+
+                  <div id="Model" class="bar-container project animate-right">
+                    <h2>Model</h2>
+                    <p>
+                      Selecting and analyzing certain features let us create a
+                      decision tree-based model that tells us whether or not we
+                      expect a new watermelon with certain features to taste and
+                      feel a certain way.
+                    </p>
+                  </div>
+                  <div
+                    id="Improvement"
+                    class="bar-container project animate-right"
+                  >
+                    <h2>Improvement</h2>
+                    <p>
+                      Every time you buy a watermelon is a chance to make this
+                      project better. Simply record the features of the
+                      watermelon before cutting into it, rate the attributes
+                      after cutting into it, and submit the form with your
+                      findings. We'll periodically incorporate new watermelons'
+                      data into the model's training dataset.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr class="featurette-divider" id="recommend" />
+
+            <div class="row featurette">
+              <h2 class="featurette-heading">Try it Out</h2>
+              <div class="col-md-3"></div>
+
+              <form>
+                <div class="form-group">
+                  <label for="exampleInputEmail1"></label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter email"
+                  />
+                  <small id="emailHelp" class="form-text text-muted"
+                    >We'll never share your email with anyone else.</small
+                  >
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="exampleInputPassword1"
+                    placeholder="Password"
+                  />
+                </div>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="exampleCheck1"
+                  />
+                  <label class="form-check-label" for="exampleCheck1"
+                    >Check me out</label
+                  >
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+
+            <div class="row featurette">
+              <canvas
+                id="circlesCanvas"
+                width="200"
+                height="100"
+                style="border: 0px solid #000000"
+              >
+              </canvas>
+
+              <script src="js/Point2D.js"></script>
+              <script src="js/Intersection.js"></script>
+              <script src="js/animateCircles.js"></script>
+            </div>
+
+            <hr class="featurette-divider" />
+            <!-- /END THE FEATURETTES -->
+          </div>
+          <!-- /.container -->
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="container foot">
+          <p>
+            <a
+              class="subtle-link cardinal-text"
+              id="email"
+              href="mailto:vonarnim@usc.edu"
+              >Contact me</a
+            >
+          </p>
+        </footer>
+      </main>
+    </div>
+
+    <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/main-2.0.0.js"></script>
+  </body>
+</html>

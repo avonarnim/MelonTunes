@@ -1,3 +1,362 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+.main {
+  width: 100%;
+}
+
+.container {
+  color: #5a5a5a;
+}
+
+.body-container {
+  height: 100%;
+  width: 100%;
+  display: inline-grid !important;
+  grid-template-rows: [welcome] 100% [rest] auto;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+main {
+  grid-area: rest;
+  grid-column-start: 1;
+  margin-top: 5%;
+}
+
+.smaller-width {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+}
+
+@media only screen and (max-device-width: 600px) {
+  .smaller-width {
+    width: 90%;
+  }
+}
+
+/* --- LOGO --- */
+#logo {
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  margin: 0;
+  max-width: 250px;
+  height: 100%;
+  z-index: 2;
+}
+@media (min-width: 820px) {
+  #logo {
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    max-width: 100%;
+    min-width: 0;
+  }
+}
+#logo a {
+  -ms-flex: none;
+  flex: none;
+  display: block;
+  position: relative;
+  margin: 0;
+  width: 100%;
+}
+#logo img {
+  -ms-flex-item-align: left;
+  -ms-grid-row-align: left;
+  align-self: left;
+  margin: 0;
+  width: auto;
+  height: auto;
+  max-height: 3rem;
+  max-width: 100%;
+}
+
+/* --- COLORING --- */
+.navbar-dark .navbar-nav .nav-link {
+  color: #322b8e;
+}
+
+.navbar-dark .navbar-nav .nav-link:focus,
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #322b8e;
+}
+
+.cardinal-back {
+  /* background-color: rgba(255, 255, 255, 0.5); */
+  background: transparent;
+  transition: background 0.5s ease 0s;
+  /* background-color: #322b8e; */
+}
+
+.gold-back {
+  background-color: #741bc1;
+}
+
+.cardinal-text {
+  color: #322b8e;
+}
+
+.gold-text {
+  color: #741bc1 !important;
+}
+
+/* FOOTER */
+.foot {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.subtle-link {
+  text-decoration: none;
+}
+
+.subtle-link:hover {
+  color: rgb(154, 1, 1);
+}
+
+/* Welcome Section */
 .jumbotron {
-  background-image: "assets/imgs/Background.jpg";
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  position: absolute;
+  margin-bottom: 10px;
+}
+
+.jumbotron p {
+  font-size: 32px;
+  font-weight: 390;
+  color: #322b8e;
+  text-align: center;
+  line-height: 60px;
+}
+
+.jumbotron h1 {
+  color: #322b8e;
+  font-size: 60px;
+  text-align: center;
+  padding-top: calc(100% / 9);
+  line-height: 100px;
+}
+
+@media only screen and (min-device-width: 1150px) {
+  .jumbotron p {
+    font-size: 40px;
+  }
+  .jumbotron h1 {
+    font-size: 72px;
+  }
+}
+
+@media only screen and (min-device-width: 380px) and (max-device-height: 580px) {
+  .jumbotron p {
+    font-size: 26px;
+    margin-bottom: 0;
+  }
+  .jumbotron h1 {
+    font-size: 48px;
+  }
+}
+
+@media only screen and (max-device-width: 380px) {
+  .jumbotron p {
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+  .jumbotron h1 {
+    font-size: 24px;
+  }
+}
+
+#welcome-message {
+  background-image: url("../assets/imgs/Background.jpg");
+  height: 100%;
+  grid-area: welcome;
+  padding-bottom: 35%;
+  opacity: 0.9;
+}
+
+/* Featurettes
+------------------------- */
+
+.row {
+  margin-top: 5rem !important;
+  margin-bottom: 5rem !important;
+}
+
+.featurette-divider {
+  margin: 0 0;
+}
+
+.featurette-heading {
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.05rem;
+}
+
+/* RESPONSIVE CSS
+  -------------------------------------------------- */
+
+@media (min-width: 992px) {
+  .row .featurette-heading {
+    margin-top: 0rem;
+  }
+}
+
+@media (min-width: 40em) {
+  .featurette-heading {
+    font-size: 50px;
+  }
+}
+
+@media (min-width: 62em) {
+  .featurette-heading {
+    margin-top: 7rem;
+  }
+}
+
+/* BUTTONS */
+.btn {
+  border: none;
+  margin: 0.5rem;
+}
+
+.btn-primary,
+.btn-primary:visited {
+  background-color: #741bc1;
+}
+
+.btn-primary:hover {
+  background-color: #741bc1;
+}
+
+/* TAB PANEL
+------------------------------------------ */
+@media (min-width: 820px) {
+  #project-bar {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column wrap;
+    flex-flow: column wrap;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+}
+
+.project-sidebar {
+  height: 100%;
+  padding: 0;
+}
+
+.project-block .bar-item {
+  width: 100%;
+  display: block;
+  white-space: normal;
+  outline: 0;
+}
+
+.bar-item {
+  padding: 0px;
+  display: block;
+  outline: 0;
+  border: none;
+}
+
+.bar-btn {
+  border: none;
+  display: inline-block;
+  padding: 8px 16px;
+  vertical-align: middle;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  background-color: inherit;
+  text-align: left;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.bar-container:after,
+.bar-container:before {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.animate-right {
+  position: relative;
+  animation: animateRight 0.4s;
+}
+@keyframes animateRight {
+  from {
+    left: 100px;
+    opacity: 0;
+  }
+  to {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+.project-info {
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.project-info div {
+  display: none;
+}
+
+.tablink {
+  display: block;
+  position: relative;
+  padding: 0.5em 1em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #181818;
+  background: white;
+  border-style: none none solid none;
+  border-width: medium;
+  border-color: #741bc1;
+}
+.tablink.active::after {
+  background: #741bc1;
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  transform: translate3d(0, 100%, 0) translate3d(0, -2px, 0);
+  transition: all 0.2s cubic-bezier(0.7, 0, 0.3, 1);
+}
+.tablink.active,
+.tablink:hover,
+.tablink:hover::after {
+  color: #ffffff !important;
+  background: #741bc1 !important;
+  -ms-transform: none;
+  transform: none;
 }

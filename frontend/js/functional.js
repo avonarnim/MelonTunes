@@ -110,25 +110,32 @@ window.onload = function () {
     storedAudio = blob;
   }
 
-  // Send data to database
-  document.getElementById("input").onclick = () => {
-    console.log("submitting data");
+  // Get prediction & send features data to database
+  document.getElementById("predictionInput").onclick = () => {
+    console.log("submitting feature data");
 
     // Getting spot conditional
     var checkRadio = document.querySelector('input[name="spotAvail"]:checked');
-
-    if (checkRadio != null) {
-      console.log(checkRadio.value + " radio button checked");
-    } else {
-      // failing case
-      console.log("No one selected");
-    }
 
     if (storedAudio == undefined || checkRadio == null) {
       // failing case
     } else {
       // submit data
+      console.log(storedAudio);
+      console.log(checkRadio.value);
     }
-    console.log(storedAudio);
+  };
+
+  // Send labels data to database
+  document.getElementById("dataInput").onclick = () => {
+    console.log("submitting label data");
+
+    if (crispness == "" || sweetness == "") {
+      // failing case
+    } else {
+      // submit data
+      console.log(crispness.value);
+      console.log(sweetness.value);
+    }
   };
 };

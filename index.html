@@ -18,8 +18,10 @@
     <link rel="stylesheet" href="css/style.css" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/replace.js"></script>
-    <script src="js/nav.js"></script>
+    <script src="js/stylistic/replace.js"></script>
+    <script src="js/stylistic/nav.js"></script>
+    <script src="js/functional.js"></script>
+    <script src="js/recorder.js"></script>
   </head>
   <body>
     <header>
@@ -154,38 +156,32 @@
 
               <form>
                 <div class="form-group">
-                  <label for="exampleInputEmail1"></label>
                   <input
-                    type="email"
-                    class="form-control"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                    placeholder="Enter email"
+                    type="radio"
+                    id="spots"
+                    name="spotAvail"
+                    value="spots"
                   />
-                  <small id="emailHelp" class="form-text text-muted"
-                    >We'll never share your email with anyone else.</small
-                  >
+                  <label for="spots">Has a Spot</label><br />
+                  <input
+                    type="radio"
+                    id="noSpots"
+                    name="spotAvail"
+                    value="noSpots"
+                  />
+                  <label for="noSpots">Doesn't Have a Spot</label><br />
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="exampleInputPassword1"
-                    placeholder="Password"
-                  />
+                  <div id="controls">
+                    <button id="recordButton">Record</button>
+                    <button id="pauseButton" disabled>Pause</button>
+                    <button id="stopButton" disabled>Stop</button>
+                  </div>
+                  <ol id="recordingsList"></ol>
                 </div>
-                <div class="form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="exampleCheck1"
-                  />
-                  <label class="form-check-label" for="exampleCheck1"
-                    >Check me out</label
-                  >
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" id="input">
+                  Submit
+                </button>
               </form>
             </div>
 
@@ -198,9 +194,9 @@
               >
               </canvas>
 
-              <script src="js/Point2D.js"></script>
-              <script src="js/Intersection.js"></script>
-              <script src="js/animateCircles.js"></script>
+              <script src="js/circles/Point2D.js"></script>
+              <script src="js/circles/Intersection.js"></script>
+              <script src="js/circles/animateCircles.js"></script>
             </div>
 
             <hr class="featurette-divider" />
@@ -234,6 +230,6 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
-    <script src="js/main-2.0.0.js"></script>
+    <script src="js/stylistic/main-2.0.0.js"></script>
   </body>
 </html>

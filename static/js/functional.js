@@ -1,7 +1,13 @@
 "use strict";
 
-window.onload = function () {
+window.onload = async function () {
   // Get audio from user
+
+  let essentia;
+
+  await EssentiaWASM().then(function (EssentiaWasm) {
+    essentia = new Essentia(EssentiaWasm);
+  });
 
   var gumStream; //stream from getUserMedia()
   var rec; //Recorder.js object
@@ -121,21 +127,52 @@ window.onload = function () {
       // failing case
     } else {
       // submit data
-      console.log(storedAudio);
-      console.log(checkRadio.value);
+      let spots = checkRadio.value == "spots" ? true : false;
+      var formData = new FormData();
+      formData.append("audio", storedAudio);
+      formData.append("spots", spots);
+
+      $.ajax({
+        url: "/predict",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        success: function (response) {
+          console.log("submitted data");
+          console.log(response);
+        },
+        error: function (response) {
+          console.log("failed to submit data");
+        },
+      });
     }
   };
 
   // Send labels data to database
   document.getElementById("dataInput").onclick = () => {
-    console.log("submitting label data");
+    let crispness = document.getElementById("crispness").value;
+    let sweetness = document.getElementById("sweetness").value;
+    console.log("submitting label data", crispness, sweetness);
 
     if (crispness == "" || sweetness == "") {
       // failing case
     } else {
       // submit data
-      console.log(crispness.value);
-      console.log(sweetness.value);
+      $.ajax({
+        url: "/submitting",
+        type: "POST",
+        data: {
+          crispness: crispness,
+          sweetness: sweetness,
+        },
+        success: function (response) {
+          console.log(response);
+          console.log("submitted data");
+        },
+        error: function (response) {
+          console.log("failed to submit data");
+        },
+      });
     }
   };
 };

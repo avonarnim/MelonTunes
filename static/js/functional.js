@@ -116,8 +116,36 @@ window.onload = async function () {
     storedAudio = blob;
   }
 
+  async function extractAudioFeatures(blob) {
+    let arrayBuffer = await blob.arrayBuffer();
+    let pitches, voicedProbabilities;
+    await audioContext.decodeAudioData(arrayBuffer, (audioBuffer) => {
+      const inputSignalVector = essentia.arrayToVector(
+        audioBuffer.getChannelData(0)
+      );
+      let outputPyYin = essentia.PitchYinProbabilistic(
+        inputSignalVector,
+        4096,
+        256,
+        0.1,
+        "zero",
+        false,
+        44100
+      );
+      pitches = essentia.vectorToArray(outputPyYin.pitch);
+      voicedProbabilities = essentia.vectorToArray(
+        outputPyYin.voicedProbabilities
+      );
+
+      outputPyYin.pitch.delete();
+      outputPyYin.voicedProbabilities.delete();
+    });
+
+    return [pitches, voicedProbabilities];
+  }
+
   // Get prediction & send features data to database
-  document.getElementById("predictionInput").onclick = () => {
+  document.getElementById("predictionInput").onclick = async () => {
     console.log("submitting feature data");
 
     // Getting spot conditional
@@ -126,23 +154,37 @@ window.onload = async function () {
     if (storedAudio == undefined || checkRadio == null) {
       // failing case
     } else {
+      let [pitches, voicedProbabilities] = await extractAudioFeatures(
+        storedAudio
+      );
+
+      console.log("in submitter");
+      console.log(pitches);
+      console.log(voicedProbabilities);
+      // pitches = JSON.stringify(pitches);
+      // voicedProbabilities = JSON.stringify(voicedProbabilities);
+      // console.log("as json");
+      // console.log(pitches);
+      // console.log(voicedProbabilities);
+
       // submit data
       let spots = checkRadio.value == "spots" ? true : false;
-      var formData = new FormData();
-      formData.append("audio", storedAudio);
-      formData.append("spots", spots);
 
       $.ajax({
         url: "/predict",
         type: "POST",
-        data: formData,
-        contentType: false,
+        data: {
+          spots: spots,
+          pitches: pitches,
+          voicedProbabilities: voicedProbabilities,
+        },
         success: function (response) {
-          console.log("submitted data");
           console.log(response);
+          console.log("submitted prediction data");
         },
         error: function (response) {
-          console.log("failed to submit data");
+          console.log("failed to submit prediction data");
+          console.log(response);
         },
       });
     }

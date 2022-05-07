@@ -20,7 +20,10 @@ def main():
 def predict():
     # get data
     print('got prediction call')
-    print(request, request.data, request.values, request.files)
+    print(request)
+    print(request.form['spots'])
+    print(request.form['pitches'])
+    # print(request.form['probabilities'])
     return "success"
 
     # # convert data into dataframe

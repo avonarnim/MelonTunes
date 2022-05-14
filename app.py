@@ -3,6 +3,7 @@ from flask import jsonify, request
 from flask import redirect, url_for, render_template
 import pandas as pd
 import pickle
+import pymongo
 
 # # # load model
 # # model = pickle.load(open('model.pkl','rb'))
@@ -46,4 +47,10 @@ def submitResults():
     return "success"
 
 if __name__ == '__main__':
-    app.run(port = 5000, debug=True)
+    app = create_app()
+
+    config = configparser.ConfigParser()
+    config.read(os.path.abspath(os.path.join(".ini")))
+    app.config['DEBUG'] = True
+    app.config['MONGO_URI'] = config['PROD']['DB_URI']
+    app.run(port = 5000)

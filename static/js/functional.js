@@ -170,14 +170,17 @@ window.onload = async function () {
       // submit data
       let spots = checkRadio.value == "spots" ? true : false;
 
+      let data = {
+        spots: spots,
+        pitches: pitches,
+        voicedProbabilities: voicedProbabilities,
+      };
+
       $.ajax({
         url: "/predict",
         type: "POST",
-        data: {
-          spots: spots,
-          pitches: pitches,
-          voicedProbabilities: voicedProbabilities,
-        },
+        contentType: "application/json",
+        data: JSON.stringify(data),
         success: function (response) {
           console.log(response);
           console.log("submitted prediction data");

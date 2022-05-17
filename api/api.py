@@ -1,10 +1,15 @@
 from flask import Blueprint, request, jsonify
 from flask import redirect, url_for, render_template
 import pymongo
-import env
+import os
+import configparser
 
 api = Blueprint('api', 'api', url_prefix='/')
-client = pymongo.MongoClient(app.config['MONGO_URI'])
+
+config = configparser.ConfigParser()
+config.read(os.path.abspath(os.path.join(".ini")))
+
+client = pymongo.MongoClient(config['PROD']['DB_URI'])
 db = client['melon-tunes']
 collection = db['user-data']
 

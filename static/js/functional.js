@@ -4,6 +4,7 @@ window.onload = async function () {
   // Get audio from user
 
   let essentia;
+  let mostRecentResponse = null;
 
   await EssentiaWASM().then(function (EssentiaWasm) {
     essentia = new Essentia(EssentiaWasm);
@@ -21,6 +22,9 @@ window.onload = async function () {
   var recordButton = document.getElementById("recordButton");
   var stopButton = document.getElementById("stopButton");
   var pauseButton = document.getElementById("pauseButton");
+
+  var subRes = document.getElementById("submissionResult");
+  var predRes = document.getElementById("predictionResult");
 
   //add events to those 2 buttons
   recordButton.addEventListener("click", startRecording);
@@ -153,6 +157,7 @@ window.onload = async function () {
 
     if (storedAudio == undefined || checkRadio == null) {
       // failing case
+      predRes.innerHTML = "Sorry, but your input is not valid.";
     } else {
       let [pitches, voicedProbabilities] = await extractAudioFeatures(
         storedAudio
@@ -161,11 +166,6 @@ window.onload = async function () {
       console.log("in submitter");
       console.log(pitches);
       console.log(voicedProbabilities);
-      // pitches = JSON.stringify(pitches);
-      // voicedProbabilities = JSON.stringify(voicedProbabilities);
-      // console.log("as json");
-      // console.log(pitches);
-      // console.log(voicedProbabilities);
 
       // submit data
       let spots = checkRadio.value == "spots" ? true : false;
@@ -182,11 +182,20 @@ window.onload = async function () {
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function (response) {
-          console.log(response);
+          const predictedCrispness = response.crispness;
+          const predictedSweetness = response.sweetness;
+          mostRecentResponse = response.resultId;
+
+          console.log("most recent response:", mostRecentResponse);
+
+          predRes.innerText = `Your submission id is: ${mostRecentResponse}\nPredicted Crispness: ${predictedCrispness}\nPredicted Sweetness: ${predictedSweetness}\n`;
+
+          document.getElementById("mtId").value = mostRecentResponse;
           console.log("submitted prediction data");
         },
         error: function (response) {
           console.log("failed to submit prediction data");
+          predRes.innerText = "Sorry, but please try again";
           console.log(response);
         },
       });
@@ -195,26 +204,32 @@ window.onload = async function () {
 
   // Send labels data to database
   document.getElementById("dataInput").onclick = () => {
+    let mtId = document.getElementById("mtId").value;
     let crispness = document.getElementById("crispness").value;
     let sweetness = document.getElementById("sweetness").value;
-    console.log("submitting label data", crispness, sweetness);
+    console.log("submitting label data", mtId, crispness, sweetness);
 
-    if (crispness == "" || sweetness == "") {
+    if (crispness == "" || sweetness == "" || mtId == null) {
       // failing case
+      subRes.innerText = "Sorry, but you need to fill out the form";
+      console.log("empty fields");
     } else {
       // submit data
       $.ajax({
         url: "/submitting",
         type: "POST",
         data: {
+          id: mtId,
           crispness: crispness,
           sweetness: sweetness,
         },
         success: function (response) {
+          subRes.innerText = "Data submitted. Thank you for your contribution!";
           console.log(response);
           console.log("submitted data");
         },
         error: function (response) {
+          subRes.innerText = "Failed to submit data";
           console.log("failed to submit data");
         },
       });

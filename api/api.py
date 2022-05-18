@@ -36,11 +36,11 @@ def predict():
         'voicedProbabilities': voicedProbabilities
     })
     print(result.inserted_id)
-    # spots = data.spots
-    # pitches = data.pitches
-    # voicedProbabilities = data.voicedProbabilities
-    return "success"
-
+    return {
+        'resultId': str(result.inserted_id),
+        'sweetness': 0.2,
+        'crispness': 0.3
+    }
     # # convert data into dataframe
     # data.update((x, [y]) for x, y in data.items())
     # data_df = pd.DataFrame.from_dict(data)
@@ -58,4 +58,10 @@ def predict():
 def submitResults():
     print('submitting presently')
     print(request, request.data, request.values, request.files)
+    sweetness = data['sweetness']
+    crispness = data['crispness']
+
+    result = collection.update_one({'_id': data['id']}, {'$inc': {'crispness': crispness, 'sweetness': sweetness}})
+
+    print(result)
     return "success"

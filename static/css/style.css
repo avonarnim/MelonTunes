@@ -203,6 +203,10 @@ main {
   letter-spacing: -0.05rem;
 }
 
+.form-wrapper {
+  margin-top: 1rem !important;
+}
+
 /* RESPONSIVE CSS
   -------------------------------------------------- */
 
